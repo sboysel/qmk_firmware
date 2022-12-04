@@ -313,3 +313,9 @@ bool music_mask_user(uint16_t keycode) {
       return true;
   }
 }
+
+void keyboard_post_init_user(void) {
+    rgblight_enable_noeeprom(); // Enables RGB, without saving settings
+    rgblight_sethsv_noeeprom(HSV_CYAN);
+    rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL);
+}
