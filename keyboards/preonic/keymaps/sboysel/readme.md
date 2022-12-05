@@ -4,3 +4,4 @@
 - Adds `EE_CLR` to Adjust layer
 - Navigation in Lower layer
 - `-=[]_+{}` placed on left hand side of Raise layer
+- Screen brightness control with the encoder in Raise layer
