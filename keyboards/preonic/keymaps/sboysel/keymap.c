@@ -73,8 +73,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_preonic_grid(
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
-  KC_DEL,  _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END, _______, _______,
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_DEL,
+  KC_DEL,  _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______,
   KC_LSFT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   RGB_TOG, _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC
 ),
@@ -251,13 +251,23 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
       }
     }
   } else {
-    if (clockwise) {
-      register_code(KC_KB_VOLUME_DOWN);
-      unregister_code(KC_KB_VOLUME_DOWN);
-    } else {
-      register_code(KC_KB_VOLUME_UP);
-      unregister_code(KC_KB_VOLUME_UP);
-    }
+        if (IS_LAYER_ON(_RAISE)) {
+          if (clockwise) {
+            register_code(KC_BRIGHTNESS_UP);
+            unregister_code(KC_BRIGHTNESS_UP);
+          } else {
+            register_code(KC_BRIGHTNESS_DOWN);
+            unregister_code(KC_BRIGHTNESS_DOWN);
+          }
+        } else {
+            if (clockwise) {
+              register_code(KC_KB_VOLUME_UP);
+              unregister_code(KC_KB_VOLUME_UP);
+            } else {
+              register_code(KC_KB_VOLUME_DOWN);
+              unregister_code(KC_KB_VOLUME_DOWN);
+            }
+        }
   }
     return true;
 }
