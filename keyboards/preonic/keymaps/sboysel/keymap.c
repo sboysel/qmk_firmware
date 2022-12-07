@@ -236,40 +236,28 @@ uint8_t muse_offset = 70;
 uint16_t muse_tempo = 50;
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (muse_mode) {
     if (IS_LAYER_ON(_RAISE)) {
-      if (clockwise) {
-        muse_offset++;
-      } else {
-        muse_offset--;
-      }
-    } else {
-      if (clockwise) {
-        muse_tempo+=1;
-      } else {
-        muse_tempo-=1;
-      }
-    }
-  } else {
-        if (IS_LAYER_ON(_RAISE)) {
-          if (clockwise) {
-            register_code(KC_BRIGHTNESS_UP);
-            unregister_code(KC_BRIGHTNESS_UP);
-          } else {
-            register_code(KC_BRIGHTNESS_DOWN);
-            unregister_code(KC_BRIGHTNESS_DOWN);
-          }
+        if (clockwise) {
+            register_code(KC_KB_VOLUME_UP);
+            unregister_code(KC_KB_VOLUME_UP);
         } else {
+            register_code(KC_KB_VOLUME_DOWN);
+            unregister_code(KC_KB_VOLUME_DOWN);
+        }
+    } else {
+        if (IS_LAYER_ON(_LOWER)) {
             if (clockwise) {
-              register_code(KC_KB_VOLUME_UP);
-              unregister_code(KC_KB_VOLUME_UP);
+                register_code(KC_BRIGHTNESS_UP);
+                unregister_code(KC_BRIGHTNESS_UP);
             } else {
-              register_code(KC_KB_VOLUME_DOWN);
-              unregister_code(KC_KB_VOLUME_DOWN);
+                register_code(KC_BRIGHTNESS_DOWN);
+                unregister_code(KC_BRIGHTNESS_DOWN);
             }
         }
-  }
-    return true;
+    }
+    // return false to disable page scroll on default layer
+    // needed to let volume and brightness to work independently
+    return false;
 }
 
 bool dip_switch_update_user(uint8_t index, bool active) {
