@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD,   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL,
   KC_CANCEL, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, _______, _______, _______, _______, _______, _______, _______,
   _______,   _______, KC_CUT,  KC_COPY, KC_PSTE, _______, _______, _______, _______, _______, _______, _______,
-  _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  _______,   _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
 /* Adjust (Lower + Raise)
@@ -238,26 +238,23 @@ uint16_t muse_tempo = 50;
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (IS_LAYER_ON(_RAISE)) {
         if (clockwise) {
-            register_code(KC_KB_VOLUME_UP);
-            unregister_code(KC_KB_VOLUME_UP);
+          register_code(KC_BRIGHTNESS_UP);
+          unregister_code(KC_BRIGHTNESS_UP);
         } else {
-            register_code(KC_KB_VOLUME_DOWN);
-            unregister_code(KC_KB_VOLUME_DOWN);
-        }
-    } else {
-        if (IS_LAYER_ON(_LOWER)) {
-            if (clockwise) {
-                register_code(KC_BRIGHTNESS_UP);
-                unregister_code(KC_BRIGHTNESS_UP);
-            } else {
-                register_code(KC_BRIGHTNESS_DOWN);
-                unregister_code(KC_BRIGHTNESS_DOWN);
-            }
+          register_code(KC_BRIGHTNESS_DOWN);
+          unregister_code(KC_BRIGHTNESS_DOWN);
         }
     }
-    // return false to disable page scroll on default layer
-    // needed to let volume and brightness to work independently
-    return false;
+    if (IS_LAYER_ON(_LOWER))  {
+        if (clockwise) {
+          register_code(KC_KB_VOLUME_UP);
+          unregister_code(KC_KB_VOLUME_UP);
+        } else {
+          register_code(KC_KB_VOLUME_DOWN);
+          unregister_code(KC_KB_VOLUME_DOWN);
+        }
+    }
+    return true;
 }
 
 bool dip_switch_update_user(uint8_t index, bool active) {
