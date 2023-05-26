@@ -3,7 +3,7 @@
 
 #pragma once
 
-/* #include "config_common.h" */
+#include "config_common.h"
 
 /* key matrix size */
 #define MATRIX_ROWS 8
@@ -22,7 +22,6 @@
 #define SERIAL_USART_FULL_DUPLEX   // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN B6     // USART TX pin
 #define SERIAL_USART_RX_PIN B7     // USART RX pin
-/* #define SPLIT_HAND_PIN B6 */
 
 /* Top left key on left half */
 #define BOOTMAGIC_LITE_ROW    0
@@ -31,10 +30,10 @@
 #define BOOTMAGIC_LITE_ROW_RIGHT    4
 #define BOOTMAGIC_LITE_COLUMN_RIGHT 5
 
-#define SPLIT_HAND_PIN B10
-#define	SPLIT_HAND_PIN_LOW_IS_LEFT
+/* #define SPLIT_HAND_PIN B10 */
+/* #define	SPLIT_HAND_PIN_LOW_IS_LEFT */
 
-#define SERIAL_USART_PIN_SWAP
+/* #define SERIAL_USART_PIN_SWAP */
 
 /*
  * Feature disable options
