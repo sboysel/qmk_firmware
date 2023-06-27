@@ -25,7 +25,7 @@
  * The second converts the arguments into a two-dimensional array which
  * represents the switch matrix.
  */
-#define LAYOUT_euclid( \
+#define LAYOUT_euclid36( \
     K00, K01, K02, K03, K04,      K30, K31, K32, K33, K34, \
     K10, K11, K12, K13, K14,      K40, K41, K42, K43, K44, \
     K20, K21, K22, K23, K24,      K50, K51, K52, K53, K54, \
